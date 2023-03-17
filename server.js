@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: "1940509@sliet.ac.in",
         pass: "hostel@07"
-    }
+    } 
 });
 
 const app = express();
@@ -26,6 +26,7 @@ app.get("/",(req,res)=> {
 });
 
 app.post("/signup",(req,res)=> {
+    console.log(re.body);
     const mailOptions = {
         from: "1940509@sliet.ac.in",
         to: req.body.newEmail,
@@ -37,6 +38,7 @@ app.post("/signup",(req,res)=> {
             res.send(error);
         }
         else {
+            console.log("Email sent: " + info.response);
             res.send("Check your mail box for OTP.");
         }
     });
@@ -45,6 +47,3 @@ app.post("/signup",(req,res)=> {
 app.listen(3000,()=> {
     console.log("Server is running on port 3000.");
 });
-
-
-// Math.floor(100000 + Math.random() * 900000);
