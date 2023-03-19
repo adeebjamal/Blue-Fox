@@ -15,6 +15,7 @@ app.use(express.static("public"));
 mongoose.set("strictQuery",false);
 mongoose.connect("mongodb://127.0.0.1:27017/Blue-Fox");
 
+// ---------- SCHEMAS ----------
 const userSchema = new mongoose.Schema({
     ID: Number,
     name: String,
@@ -24,6 +25,15 @@ const userSchema = new mongoose.Schema({
     orders: []
 });
 const USER = mongoose.model("User",userSchema);
+
+const foodSchema = new mongoose.Schema({
+    ID: Number,
+    name: String,
+    description: String,
+    price: Number,
+    imageUrl: String
+});
+const FOOD = mongoose.model("food",foodSchema);
 
 // ---------- GET ----------
 app.get("/",(req,res)=> {
@@ -55,14 +65,16 @@ app.post("/login", async (req,res)=> {
     try {
         const tempUser = await USER.findOne({email: req.body.userEmail});
         if(tempUser.password === md5(req.body.userPassword)) {
-            res.send("Login Successful.");
+            res.render("user-dashboard",{
+                NAME: tempUser.name
+            });
         }
         else {
             res.render("homepage");
         }
     }
     catch(error) {
-        res.send(error);
+        res.render("homepage");
     }
 });
 
