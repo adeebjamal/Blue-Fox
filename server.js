@@ -31,7 +31,7 @@ const foodSchema = new mongoose.Schema({
     name: String,
     description: String,
     price: Number,
-    imageUrl: String
+    imageUrl: String        // https://drive.google.com/uc?id= + imageID
 });
 const FOOD = mongoose.model("food",foodSchema);
 
@@ -40,6 +40,9 @@ app.get("/",(req,res)=> {
     res.render("homepage");
 });
 
+app.get("/add-dish", async (req,res)=> {
+    res.render("add-dish");
+});
 
 // ---------- POST ----------
 app.post("/signup",async (req,res)=> {
@@ -75,6 +78,29 @@ app.post("/login", async (req,res)=> {
     }
     catch(error) {
         res.render("homepage");
+    }
+});
+
+app.post("/add-dish", async (req,res)=> {
+    if(md5(req.body.key) === "7028aec409b4f7edb040a6e07607783d") {
+        try {
+            const food_count = await FOOD.countDocuments({});
+            const tempFood = new FOOD({
+                ID: food_count + 1,
+                name: req.body.newName,
+                description: req.body.newDescription,
+                price: Number(req.body.newPrice),
+                imageUrl: "https://drive.google.com/uc?id=" + req.body.newID
+            });
+            await tempFood.save();
+            res.send("Dish added successfully.");
+        }
+        catch(error) {
+            res.render("add-dish");
+        }
+    }
+    else {
+        res.render("Incorrect key. Try again.");
     }
 });
 

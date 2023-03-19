@@ -44,3 +44,5 @@ food collection:
 
 
 adeeb@gmial.com 123
+
+admin password: LINUX-mint
