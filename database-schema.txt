@@ -39,3 +39,8 @@ food collection:
    price: Number,
    imageUrl: String
 }
+
+
+
+
+adeeb@gmial.com 123

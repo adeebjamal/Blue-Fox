@@ -1,1 +1,3 @@
-19-03-2023      Added functionality for new users to Sign Up.
+19-03-2023
+    Added functionality for new users to Sign Up.
+    Added functionality for existing users to login.

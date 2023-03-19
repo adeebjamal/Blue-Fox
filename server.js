@@ -25,10 +25,13 @@ const userSchema = new mongoose.Schema({
 });
 const USER = mongoose.model("User",userSchema);
 
+// ---------- GET ----------
 app.get("/",(req,res)=> {
     res.render("homepage");
 });
 
+
+// ---------- POST ----------
 app.post("/signup",async (req,res)=> {
     try {
         const curr_count = await USER.countDocuments({});
@@ -42,6 +45,21 @@ app.post("/signup",async (req,res)=> {
         });
         await tempUser.save();
         res.send("Signup Successful.");
+    }
+    catch(error) {
+        res.send(error);
+    }
+});
+
+app.post("/login", async (req,res)=> {
+    try {
+        const tempUser = await USER.findOne({email: req.body.userEmail});
+        if(tempUser.password === md5(req.body.userPassword)) {
+            res.send("Login Successful.");
+        }
+        else {
+            res.render("homepage");
+        }
     }
     catch(error) {
         res.send(error);
