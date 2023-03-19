@@ -1,0 +1,41 @@
+user collection:
+{
+   _id: ObjectId,
+   firstName: String,
+   lastName: String,
+   email: String,
+   password: String,
+   address: {
+      street: String,
+      city: String,
+      state: String,
+      country: String,
+      postalCode: String
+   },
+   orders: [{
+      _id: ObjectId,
+      orderDate: Date,
+      deliveryAddress: {
+         street: String,
+         city: String,
+         state: String,
+         country: String,
+         postalCode: String
+      },
+      items: [{
+         foodItemId: ObjectId,
+         quantity: Number,
+         price: Number
+      }]
+   }]
+}
+
+
+food collection:
+{
+   _id: ObjectId,
+   name: String,
+   description: String,
+   price: Number,
+   imageUrl: String
+}

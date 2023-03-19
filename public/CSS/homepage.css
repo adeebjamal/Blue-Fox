@@ -35,6 +35,13 @@ input[type="checkbox"] {
     /* increase the size of the checkbox */
 }
 
+textarea {
+    border: 1px solid #ccc;
+    padding: 5px;
+    background-color: #f8f8f8;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
 
 .button-15 {
     margin-left: auto;
