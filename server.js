@@ -44,6 +44,10 @@ app.get("/add-dish", async (req,res)=> {
     res.render("add-dish");
 });
 
+app.get("/purchase/:foodID/:customerID", async (req,res)=> {
+    res.render("checkout");
+});
+
 // ---------- POST ----------
 app.post("/signup",async (req,res)=> {
     try {
@@ -68,8 +72,11 @@ app.post("/login", async (req,res)=> {
     try {
         const tempUser = await USER.findOne({email: req.body.userEmail});
         if(tempUser.password === md5(req.body.userPassword)) {
+            const dishes = await FOOD.find();
             res.render("user-dashboard",{
-                NAME: tempUser.name
+                NAME: tempUser.name,
+                dishList: dishes,
+                customerID: tempUser.ID
             });
         }
         else {

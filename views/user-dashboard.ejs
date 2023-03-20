@@ -5,9 +5,24 @@
         <meta charset="UTF-8">
         <title><%= NAME %> dashboard</title>
     </head>
-    <body>
+    <body style="font-family: sans-serif;">
         <h1>Welcome <%= NAME %></h1>
         <h3>Blue Fox Restaurant</h3>
-        <img src="https://drive.google.com/uc?id=1CmBfVVKNUTN4s1jHuSGlOGl_uQ1aKpp-" alt="">
+        <% for(let i=0; i<dishList.length; i++) { %>
+            <hr>
+            <table cellspacing="20px">
+                <tr>
+                    <td>
+                        <img style="height: 200px; width: 200px" src= <%= dishList[i].imageUrl %> alt="">
+                    </td>
+                    <td>
+                        <h3>Name: <%= dishList[i].name %> </h3>
+                        <p><%= dishList[i].description %></p>
+                        <h4>Price: Rs. <%= dishList[i].price %></h4>
+                        <a href= <%= "/purchase/" + dishList[i].ID.toString() + "/" + customerID %> >Purchase</a>
+                    </td>
+                </tr>
+            </table>
+        <% } %>
     </body>
 </html>
