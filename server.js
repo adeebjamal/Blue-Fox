@@ -45,7 +45,17 @@ app.get("/add-dish", async (req,res)=> {
 });
 
 app.get("/purchase/:foodID/:customerID", async (req,res)=> {
-    res.render("checkout");
+    try {
+        const curr_customer = await USER.findOne({ID : Number(req.params.customerID)});
+        const curr_dish = await FOOD.findOne({ID : Number(req.params.foodID)});
+        res.json({
+            CustomerDetails: curr_customer,
+            OrderDetails: curr_dish
+        });
+    }
+    catch(error) {
+        res.send(error);
+    }
 });
 
 // ---------- POST ----------
