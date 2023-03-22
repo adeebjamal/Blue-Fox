@@ -4,7 +4,20 @@
         <meta charset="utf-8">
         <title>Purchase item</title>
     </head>
-    <body>
-        
+    <body style="font-family: sans-serif;">
+        <h2>Order details:</h2>
+        <table>
+            <tr>
+                <td><img style="height: 200px; width: 200px;" src=<%= imgLink %> alt=""></td>
+                <td>
+                    <h3>Name: <%= dishName %></h3>
+                    <h3>Description: <%= dishDescription %></h3>
+                    <h3>Price: Rs. <%= dishPrice %></h3>
+                </td>
+            </tr>
+        </table>
+        <h2>Customer's details:</h2>
+        <h3>Name: <%= customerName %></h3>
+        <h3>Address: <%= customerAddress %></h3>
     </body>
 </html>

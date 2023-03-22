@@ -35,6 +35,12 @@ const foodSchema = new mongoose.Schema({
 });
 const FOOD = mongoose.model("food",foodSchema);
 
+const orderSchema = new mongoose.Schema({
+    ID: Number,
+    date: Date,
+    address: String
+});
+const ORDER = mongoose.model("Order",orderSchema);
 // ---------- GET ----------
 app.get("/",(req,res)=> {
     res.render("homepage");
@@ -48,9 +54,13 @@ app.get("/purchase/:foodID/:customerID", async (req,res)=> {
     try {
         const curr_customer = await USER.findOne({ID : Number(req.params.customerID)});
         const curr_dish = await FOOD.findOne({ID : Number(req.params.foodID)});
-        res.json({
-            CustomerDetails: curr_customer,
-            OrderDetails: curr_dish
+        res.render("checkout",{
+            imgLink: curr_dish.imageUrl,
+            dishName: curr_dish.name,
+            dishDescription: curr_dish.description,
+            dishPrice: curr_dish.price,
+            customerName: curr_customer.name,
+            customerAddress: curr_customer.address
         });
     }
     catch(error) {

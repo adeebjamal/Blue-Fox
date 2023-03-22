@@ -5,3 +5,6 @@
 
 20-03-2023
     Designed customer's dashboard. (It displays food items and their info)
+
+22-03-2023
+    Added checkout page
