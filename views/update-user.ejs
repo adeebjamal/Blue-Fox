@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Update user details</title>
+</head>
+
+<body style="font-family: sans-serif;">
+    <h1>Hello, <%= NAME %>
+    </h1>
+    <h4>Fill the following form and click on SUBMIT button to update your details</h4>
+    <form action=<%= "/update-user/" + userID.toString() %> method="put">
+        <input type="text" name="newName" placeholder="Name" required><br>
+        <input type="text" name="newPhone" placeholder="Contact number" required><br>
+        <textarea name="newAddress" cols="30" rows="10" placeholder="Address" required></textarea><br>
+        <input type="password" name="newPassword" placeholder="Password" required><br>
+        <button class="button-10" type="SUBMIT">SUBMIT</button>
+    </form>
+    <style>
+        input {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            color: #555;
+            background-color: #f2f2f2;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        textarea {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            color: #555;
+            background-color: #f2f2f2;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        .button-10 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 6px 14px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            border-radius: 6px;
+            border: none;
+
+            color: #fff;
+            background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+            background-origin: border-box;
+            box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-10:focus {
+            box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+            outline: 0;
+        }
+    </style>
+</body>
+
+</html>

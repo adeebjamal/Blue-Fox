@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     ID: Number,
     name: String,
     email: String,
+    phone: String,
     password: String,
     address: String,
     orders: []
@@ -41,6 +42,7 @@ const orderSchema = new mongoose.Schema({
     address: String
 });
 const ORDER = mongoose.model("Order",orderSchema);
+
 // ---------- GET ----------
 app.get("/",(req,res)=> {
     res.render("homepage");
@@ -61,6 +63,19 @@ app.get("/purchase/:foodID/:customerID", async (req,res)=> {
             dishPrice: curr_dish.price,
             customerName: curr_customer.name,
             customerAddress: curr_customer.address
+        });
+    }
+    catch(error) {
+        res.send(error);
+    }
+});
+
+app.get("/update-user/:userID", async(req,res)=> {
+    try {
+        const tempUser = await USER.findOne({ID: Number(req.params.userID)});
+        res.render("update-user",{
+            NAME: tempUser.name,
+            userID: tempUser.ID
         });
     }
     catch(error) {
@@ -95,6 +110,7 @@ app.post("/login", async (req,res)=> {
             const dishes = await FOOD.find();
             res.render("user-dashboard",{
                 NAME: tempUser.name,
+                userID: tempUser.ID,
                 dishList: dishes,
                 customerID: tempUser.ID
             });
@@ -128,6 +144,27 @@ app.post("/add-dish", async (req,res)=> {
     }
     else {
         res.render("Incorrect key. Try again.");
+    }
+});
+
+// ---------- PUT -----------
+app.put("/update-user/:userID", async(req,res)=> {
+    try {
+        console.log(req.body);
+        await USER.updateOne(
+            {ID: Number(req.params.userID)},
+            {
+                name: req.body.newName,
+                phone: req.body.newPhone,
+                address: req.body.newAddress,
+                password: md5(req.body.newPassword)
+            }
+        );
+        res.send("Details updated successfully.");
+    }
+    catch(error) {
+        console.log(error);
+        res.send(error);
     }
 });
 
