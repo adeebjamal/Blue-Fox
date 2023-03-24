@@ -10,4 +10,7 @@
     Added checkout page
 
 23-03-2023
-    Added feature for users to update their details
+    Added feature for users to update their details (Not working)
+
+24-03-2023
+    Fixed user details update feature
