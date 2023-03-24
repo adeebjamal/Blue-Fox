@@ -70,9 +70,9 @@ app.get("/purchase/:foodID/:customerID", async (req,res)=> {
     }
 });
 
-app.get("/update-user/:userID", async(req,res)=> {
+app.get("/update-user/:user_ID", async(req,res)=> {
     try {
-        const tempUser = await USER.findOne({ID: Number(req.params.userID)});
+        const tempUser = await USER.findOne({ID: Number(req.params.user_ID)});
         res.render("update-user",{
             NAME: tempUser.name,
             userID: tempUser.ID
@@ -147,12 +147,11 @@ app.post("/add-dish", async (req,res)=> {
     }
 });
 
-// ---------- PUT -----------
-app.put("/update-user/:userID", async(req,res)=> {
+app.post("/update-user", async(req,res)=> {
     try {
-        console.log(req.body);
+        console.log("UPDATE request received.");
         await USER.updateOne(
-            {ID: Number(req.params.userID)},
+            {ID: Number(req.body.newID)},
             {
                 name: req.body.newName,
                 phone: req.body.newPhone,

@@ -8,3 +8,6 @@
 
 22-03-2023
     Added checkout page
+
+23-03-2023
+    Added feature for users to update their details
