@@ -62,7 +62,8 @@ app.get("/purchase/:foodID/:customerID", async (req,res)=> {
             dishDescription: curr_dish.description,
             dishPrice: curr_dish.price,
             customerName: curr_customer.name,
-            customerAddress: curr_customer.address
+            customerAddress: curr_customer.address,
+            customerContact: curr_customer.phone
         });
     }
     catch(error) {
