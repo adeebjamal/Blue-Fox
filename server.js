@@ -49,8 +49,29 @@ app.get("/",(req,res)=> {
     res.render("homepage");
 });
 
+app.get("/admin/:password", async(req,res)=> {
+    try {
+        if(md5(req.params.password) === "7028aec409b4f7edb040a6e07607783d") {
+            res.render("admin-dashboard");
+        }
+        else {
+            res.send("Incorrect password.");
+        }
+    }
+    catch(error) {
+        res.send(error);
+    }
+});
+
 app.get("/add-dish", async (req,res)=> {
     res.render("add-dish");
+});
+
+app.get("/view-orders", async(req,res)=> {
+    const orders = await ORDER.find({});
+    res.render("orders",{
+        ordersList: orders
+    });
 });
 
 app.get("/purchase/:foodID/:customerID", async (req,res)=> {

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Order list</title>
+    </head>
+    <body>
+        <h1>Below is the list of all orders</h1>
+        <% for(let i=0; i<ordersList.length; i++) { %>
+            <hr>
+            <h3>Order ID: <%= ordersList[i].ID %></h3>
+            <p>User's details:</p>
+            <pre><%= JSON.stringify(ordersList[i].user,null,2) %></pre>
+            <p>Food details:</p>
+            <pre><%= JSON.stringify(ordersList[i].dish,null,2) %></pre>
+        <% } %>
+    </body>
+</html>

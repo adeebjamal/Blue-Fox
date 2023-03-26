@@ -17,3 +17,4 @@
 
 26-03-2023
     Added feature for users to place order
+    Added feature for admin to access his dashboard by typing `localhost:3000/admin/PASSWORD` into the address bar where PASSWORD is admin password.
