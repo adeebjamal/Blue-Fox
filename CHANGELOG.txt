@@ -14,3 +14,6 @@
 
 24-03-2023
     Fixed user details update feature
+
+26-03-2023
+    Added feature for users to place order

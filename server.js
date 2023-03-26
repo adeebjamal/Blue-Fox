@@ -38,8 +38,9 @@ const FOOD = mongoose.model("food",foodSchema);
 
 const orderSchema = new mongoose.Schema({
     ID: Number,
+    user: JSON,
+    dish: JSON,
     date: Date,
-    address: String
 });
 const ORDER = mongoose.model("Order",orderSchema);
 
@@ -63,7 +64,9 @@ app.get("/purchase/:foodID/:customerID", async (req,res)=> {
             dishPrice: curr_dish.price,
             customerName: curr_customer.name,
             customerAddress: curr_customer.address,
-            customerContact: curr_customer.phone
+            customerContact: curr_customer.phone,
+            userID: curr_customer.ID,
+            dishID: curr_dish.ID
         });
     }
     catch(error) {
@@ -78,6 +81,26 @@ app.get("/update-user/:user_ID", async(req,res)=> {
             NAME: tempUser.name,
             userID: tempUser.ID
         });
+    }
+    catch(error) {
+        res.send(error);
+    }
+});
+
+app.get("/placeOrder/:userID/:dishID", async(req,res)=> {
+    try {
+        const curr_user = await USER.findOne({ID: Number(req.params.userID)});
+        const curr_item = await FOOD.findOne({ID: Number(req.params.dishID)});
+        const curr_count = await ORDER.countDocuments({});
+        const curr_order = new ORDER({
+            ID: curr_count + 1,
+            user: curr_user,
+            dish: curr_item,
+            date: new Date()
+        });
+        await curr_order.save();
+        console.log(curr_order);
+        res.send("Order placed successfully.");
     }
     catch(error) {
         res.send(error);
