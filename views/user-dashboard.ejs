@@ -8,7 +8,8 @@
     <body style="font-family: sans-serif;">
         <h1>Welcome <%= NAME %></h1>
         <h3>Blue Fox Restaurant</h3>
-        <a href=<%= "/update-user/" + userID.toString() %> >Update your details</a>
+        <a href=<%= "/update-user/" + userID.toString() %> >Update your details</a><br>
+        <a href=<%= "/view-user-orders/" + userID.toString() %> >View your orders</a>
         <% for(let i=0; i<dishList.length; i++) { %>
             <hr>
             <table cellspacing="20px">

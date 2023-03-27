@@ -120,12 +120,18 @@ app.get("/placeOrder/:userID/:dishID", async(req,res)=> {
             date: new Date()
         });
         await curr_order.save();
-        console.log(curr_order);
         res.send("Order placed successfully.");
     }
     catch(error) {
         res.send(error);
     }
+});
+
+app.get("/view-user-orders/:userID", async(req,res)=> {
+    const orders = await ORDER.find({"user.ID": Number(req.params.userID)});
+    res.render("user-orders",{
+        ordersList: orders
+    });
 });
 
 // ---------- POST ----------
