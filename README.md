@@ -1,32 +1,14 @@
-# Software Services
+### This code is a Node.js server-side code using Express.js and Mongoose.js to create a web application for a food ordering system.
 
-This is a web application developed using Node.js and MongoDB. The application provides a registration and login system that allows users to access restricted content once they have logged in successfully. The application also provides a contact us feature that allows users to send their queries and feedback to the developers. Additionally, the application displays popular web development technologies once the user is logged in.
-<br>
+The code creates three Mongoose models: `USER`, `FOOD`, and `ORDER`. USER model contains information about users, FOOD model contains information about food items, and ORDER model contains information about orders placed by customers. The code defines several routes, including the following:
 
-## The following are the main features of the application:
-
-* Registration: The user can register by filling a form with their first name, last name, email address, and password. The registration details are stored in the MongoDB database.
-* Login: The user can log in using their email address and password. Once the user logs in successfully, they can access restricted content, which displays popular web development technologies.
-* Logout: The user can log out by clicking on the logout button. Once the user logs out, they are redirected to the homepage.
-*Contact Us: The user can send their queries and feedback to the developers using the contact us form. Once the user submits the form, the details are stored in the MongoDB database.
-
-<br><br>
-
-The application follows the Model-View-Controller (MVC) architecture, where the loginSchema.js and userSchema.js files define the models, the app.js file defines the controller, and the HTML files in the views folder define the view.
-<br>
-
-The loginSchema.js and userSchema.js files define the models for the login details and user details, respectively. The dbConnect.js file establishes a connection between the MongoDB database and the Node.js application. The app.js file defines the controller, which handles the HTTP requests and responses.
-<br>
-
-The app.js file defines the routes for the application. The '/' route renders the homepage, the '/contact' route handles the contact us form submissions, the '/register' route handles the registration form submissions, the '/login' route handles the login form submissions, and the '/user' route renders the restricted content once the user is logged in.
-<br>
-
-The application uses the Express.js framework for handling HTTP requests and responses. It also uses the Mongoose library for connecting to the MongoDB database.
-<br>
-
-To run the application, navigate to the root directory of the application and run the following command in the terminal:<br>
-`node app.js` or `nodemon app.js` (if you have nodemon installed on your machine).
-This command starts the server and listens to incoming HTTP requests on port 3000 by default. Alternatively, you can set the port number using the environment variable 'PORT'.
-<br>
-
-In conclusion, this web application provides a simple registration and login system that allows users to access restricted content. The application also provides a contact us feature that allows users to send their queries and feedback to the developers. The application is built using Node.js and MongoDB and follows the Model-View-Controller (MVC) architecture.
+* `/`: renders the homepage of the web application.<br>
+* `/signup`: allows users to sign up by submitting a form with their name, email, password, and address. The code creates a new USER document in the MongoDB database using the USER model and saves the document.<br>
+* `/login`: allows users to log in by submitting a form with their email and password. The code retrieves the corresponding USER document from the MongoDB database using the findOne() method of the USER model and checks whether the password is correct. If the password is correct, the code renders the user dashboard page.
+* `/admin/:password`: allows an administrator to log in by entering a password as a URL parameter. If the password is correct, the code renders the admin dashboard page.
+* `/add-dish`: allows an administrator to add a new food item by submitting a form with the name, description, price, and image ID of the food item. The code creates a new FOOD document in the MongoDB database using the FOOD model and saves the document.
+* `/view-orders`: renders a page that displays all orders in the MongoDB database.
+* `/purchase/:foodID/:customerID`: allows a customer to purchase a food item by clicking the "Buy Now" button on the user dashboard page. The code retrieves the corresponding USER and FOOD documents from the MongoDB database using the findOne() method of the USER and FOOD models, respectively, and renders a checkout page that displays information about the food item and the customer.
+* `/update-user/:user_ID`: allows a user to update their name by submitting a form with their new name. The code retrieves the corresponding USER document from the MongoDB database using the findOne() method of the USER model and renders an update user page that displays the current name and a form to update the name.
+* `/placeOrder/:userID/:dishID`: allows a user to place an order by clicking the "Place Order" button on the checkout page. The code creates a new ORDER document in the MongoDB database using the ORDER model and saves the document.
+* `/view-user-orders/:userID`: renders a page that displays all orders placed by a user in the MongoDB database. The code retrieves the corresponding ORDER documents from the MongoDB database using the find() method of the ORDER model and renders an orders page that displays the orders.
