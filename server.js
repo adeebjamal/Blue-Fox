@@ -15,7 +15,7 @@ app.use(express.static("public"));
 mongoose.set("strictQuery",false);
 mongoose.connect("mongodb://127.0.0.1:27017/Blue-Fox");
 
-// ------------- SCHEMAS -------------
+// -------------- SCHEMAS --------------
 const userSchema = new mongoose.Schema({
     ID: Number,
     name: String,
